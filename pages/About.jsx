@@ -7,7 +7,7 @@ export default function About() {
         <div className="about-page-container">
             <img src={bgImg} className="about-hero-image" />
             <div className="about-page-content">
-                <h1>Don’t settle for ordinary when you can ride a snowmobile.</h1>
+                <h1>Don’t settle for ordinary when you can experience the freedom of a snow machine.</h1>
                 <p>Our goal is to enhance your winter experience with top-quality snowmobile rentals. Each snowmobile is fully inspected to ensure your ride is safe and reliable.</p>
                 <p>Our team consists of snowmobile enthusiasts who understand the best way to explore the winter landscape.</p>
             </div>

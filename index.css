@@ -18,6 +18,12 @@ body {
   scrollbar-width: none;
 }
 
+.site-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 header {
     height: 110px;
     display: flex;
@@ -33,6 +39,12 @@ header .site-logo {
     font-size: 25px;
 }
 
+a.active-link {
+    font-weight: bold;
+    text-decoration: underline;
+    color: #161616;
+}
+
 header a {
     text-decoration: none;
     color: #4D4D4D;
@@ -43,6 +55,22 @@ header a {
 header a:hover {
     color: #161616;
     text-decoration: underline;
+}
+
+main {
+    margin-bottom: 84px;
+}
+
+footer {
+    background-color: #161616;
+    color: #AAAAAA;
+    height: 74px;
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
+    font-weight: 500;
 }
 
 .link-button {
@@ -58,6 +86,18 @@ header a:hover {
     transition: transform .1s ease-in-out;
 }
 
+.back-button {
+    display: block;
+    color: black;
+    text-decoration: none;
+    margin-top: 60px;
+    margin-left: 26px;
+}
+
+.back-button span:hover {
+    text-decoration: underline;
+}
+
 .link-button:hover {
     transform: translate(1px, 1px);
 }
@@ -69,15 +109,14 @@ header a:hover {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    min-height: 350px;
+    min-height: 70vh;
     color: white;
     padding: 45px 23px;
 }
 
 .home-container h1 {
     font-weight: 700;
-    font-size: 2.25rem;
-    line-height: 42px;
+    font-size: 2.5rem;
 }
 
 .home-container p {
@@ -142,4 +181,310 @@ header a:hover {
     background-color: #161616;
     color: white;
     border-radius: 10px;
+}
+
+/*** SNOWMOBILE PAGES ***/
+
+.snowmobile-list-container {
+    padding-inline: 23px
+}
+
+.snowmobile-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    gap: 50px 34px;
+    margin-top: 57px;
+}
+
+.snowmobile-tile a {
+    color: #161616;
+    text-decoration: none;    
+}
+
+.snowmobile-tile img {
+    width: 100%;
+    max-width: 500px; 
+    aspect-ratio: 1 / 1; 
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.snowmobile-list-container button {
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.snowmobile-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+
+.snowmobile-info h3 {
+    margin-bottom: 6px;
+}
+
+.snowmobile-info p {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0;
+}
+
+.snowmobile-info p span {
+    align-self: flex-end; 
+}
+
+.snowmobile-type {
+    height: 34px;
+    padding: 6px 26px;
+    font-style: normal;
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    background-color: #FFEAD0;
+    color: #4D4D4D;
+    transition: 200ms all cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.snowmobile-type:hover {
+    color: #FFEAD0;
+}
+
+.snowmobile-type:focus {
+    outline: none;
+}
+
+.snowmobile-type.selected {
+    color: #FFEAD0;
+}
+
+.snowmobile-type.simple:hover, .snowmobile-type.simple.selected {
+    background-color: #E17654;
+}
+
+.snowmobile-type.rugged:hover, .snowmobile-type.rugged.selected {
+    background-color: #115E59;
+}
+
+.snowmobile-type.luxury:hover, .snowmobile-type.luxury.selected {
+    background-color: #161616;
+}
+
+.snowmobile-type.clear-filters {
+    margin-left: -20px;
+    height: 34px;
+    padding: 6px 26px;
+    font-style: normal;
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    text-decoration: underline;
+    background-color: transparent;
+    color: #4D4D4D;
+}
+
+i[class*='snowmobile-type-'] {
+    padding: 7px 14px;
+}
+
+.snowmobile-detail-container {
+    padding: 27px;
+}
+
+.snowmobile-detail-container .back-button {
+    color: black;
+    text-decoration: none;
+}
+
+.snowmobile-detail-container .back-button:visited {
+    
+}
+
+.snowmobile-detail-container .back-button span {
+    text-decoration: underline;
+}
+
+.snowmobile-detail {
+    display: flex;
+    flex-direction: column;
+    color: #161616;
+}
+
+.snowmobile-detail img {
+    border-radius: 5px;
+    margin-block: 47px;
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+
+.snowmobile-detail h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.snowmobile-detail > i {
+    align-self: flex-start;
+}
+
+.snowmobile-detail .snowmobile-price {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+}
+
+.snowmobile-detail .snowmobile-price span {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.snowmobile-detail .link-button {
+    background-color: #FF8C38;
+    color: white;
+    font-size: 1.125rem;
+}
+
+.host-nav {
+    display: flex;
+}
+
+.host-nav a {
+    text-decoration: none;
+    color: #4D4D4D;
+    font-weight: 500;
+    padding: 5px 20px;
+}
+
+.host-nav a:hover {
+    color: #161616;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.host-snowmobile-link-wrapper {
+    color: unset;
+    text-decoration: unset;
+}
+
+.host-snowmobiles-list {
+    padding-inline: 26px;
+}
+
+.host-snowmobiles-title {
+    padding-inline: 26px;
+}
+
+.host-snowmobile-single {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    margin-bottom: 15px;
+    padding-block: 18px;
+    padding-left: 24px;
+}
+
+.host-snowmobile-single > img {
+    height: 70px;
+    border-radius: 5px;
+    margin-right: 17px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+
+.host-snowmobile-info h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-block: 10px;
+}
+
+.host-snowmobile-info p {
+    margin-block: 10px;
+}
+
+.host-snowmobile-detail-layout-container {
+    background-color: white;
+    padding: 24px;
+    margin: 30px 26px;
+}
+
+.host-snowmobile-detail {
+    display: flex;
+    align-items: center;
+}
+
+.host-snowmobile-detail > img {
+    height: 160px;
+    border-radius: 5px;
+    margin-right: 20px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+
+}
+
+.host-snowmobile-detail-info-text > h3 {
+    margin-top: 24px;
+    margin-bottom: 5px;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.host-snowmobile-detail-info-text > h4 {
+    font-size: 20px;
+    margin-block: 0;
+    font-weight: 500;
+}
+
+.host-snowmobile-detail-nav {
+    display: flex;
+    margin-block: 25px;
+}
+
+.host-snowmobile-detail-nav a {
+    text-decoration: none;
+    color: #4D4D4D;
+    font-weight: 500;
+    padding: 5px 20px;
+}
+
+.host-snowmobile-detail-nav a:first-of-type {
+    text-decoration: none;
+    color: #4D4D4D;
+    font-weight: 500;
+    padding: 5px 15px;
+    margin-left: -15px;
+}
+
+.host-snowmobile-detail-nav a:hover {
+    color: #161616;
+    text-decoration: underline;
+    font-weight: 700;
+}
+
+.host-snowmobile-detail-info > h4 {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 21px;
+}
+.host-snowmobile-detail-info > h4 > span {
+    font-weight: 500;
+}
+
+.host-snowmobile-price {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.host-snowmobile-price > span {
+    font-size: 16px;
+    color: #4D4D4D;
+}
+
+.host-snowmobile-detail-image {
+    height: 100px;
+    border-radius: 5px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
 }
