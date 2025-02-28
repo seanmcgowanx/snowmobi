@@ -15,6 +15,7 @@ import HostSnowmobileDetail from './pages/Host/HostSnowmobileDetail';
 import HostSnowmobileInfo from './pages/Host/HostSnowmobileInfo';
 import HostSnowmobilePricing from './pages/Host/HostSnowmobilePricing';
 import HostSnowmobilePhotos from './pages/Host/HostSnowmobilePhotos';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -28,14 +29,15 @@ function App() {
           <Route path="host" element={<HostLayout/>}>
             <Route index element= {<Dashboard />}/>
             <Route path="income" element= {<Income />}/>
+            <Route path="reviews" element= {<Reviews />}/>
             <Route path="snowmobiles" element= {<HostSnowmobiles />}/>
             <Route path="snowmobiles/:id" element= {<HostSnowmobileDetail />}>
               <Route index element= {<HostSnowmobileInfo />}/>
               <Route path="pricing" element= {<HostSnowmobilePricing />}/>
               <Route path="photos" element= {<HostSnowmobilePhotos />}/>
             </Route>
-            <Route path="reviews" element= {<Reviews />}/>
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>

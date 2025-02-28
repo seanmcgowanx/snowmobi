@@ -1,10 +1,11 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link, useLocation } from 'react-router-dom'
 import { getSnowmobile } from '../../api'
 
 export default function SnowmobileDetail() {
 
     const params = useParams()
+    const location = useLocation()
     const [snowmobile, setSnowmobile] = React.useState(null)
     
 
@@ -22,8 +23,16 @@ export default function SnowmobileDetail() {
 
     }, [params.id])
 
+    const search = ("?" + location.state?.search) || ""
+    const type = location.state?.type
+
     return (
         <div className="snowmobile-detail-container">
+            <Link
+                to={`../${search}`}
+                relative='path'
+                className="back-button"
+            >&larr; <span>Back to all {type} snowmobiles</span></Link>
             {snowmobile ? (
                 <div className="snowmobile-detail">
                     <img src={snowmobile.imageUrl} />

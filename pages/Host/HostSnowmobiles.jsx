@@ -21,7 +21,7 @@ export default function HostSnowmobiles() {
 
     const hostSnowmobilesEls = hostSnowmobiles.map(hostSnowmobile => (
         <Link
-            to={`/host/snowmobiles/${hostSnowmobile.id}`}
+            to={hostSnowmobile.id}
             key={hostSnowmobile.id}
             className="host-snowmobile-link-wrapper"
         >

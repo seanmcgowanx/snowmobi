@@ -189,6 +189,16 @@ footer {
     padding-inline: 23px
 }
 
+.snowmobile-list-filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.snowmobile-list-filter-buttons > a {
+    margin-right: 15px;
+    text-decoration: none;
+}
+
 .snowmobile-list {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -487,4 +497,14 @@ i[class*='snowmobile-type-'] {
     border-radius: 5px;
     aspect-ratio: 1/1;
     object-fit: cover;
+}
+
+.not-found-container {
+    padding-inline: 26px;
+}
+
+.not-found-container .link-button {
+    width: 100%;
+    background-color: #161616;
+    color: white;
 }
