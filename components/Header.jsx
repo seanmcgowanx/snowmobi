@@ -31,6 +31,13 @@ export default function Header() {
             >
                 Snowmobiles
             </NavLink>
+            <Link to="login" className="login-link">
+                <img 
+                    src="../assets/images/avatar-icon.png" 
+                    width="20px"
+                    className="login-icon"
+                />
+            </Link>
             </nav>
         </header>
     )
