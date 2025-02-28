@@ -7,15 +7,19 @@ export default function SnowmobileDetail() {
     const params = useParams()
     const location = useLocation()
     const [snowmobile, setSnowmobile] = React.useState(null)
-    
+    const [loading, setLoading] = React.useState(false)
+    const [error, setError] = React.useState(null)
 
    React.useEffect(() => {
         async function loadSnowmobileDetail() {
+            setLoading(true)
             try {
                 const data = await getSnowmobile(params.id)
                 setSnowmobile(data)
             } catch (error) {
-                console.error("Error fetching snowmobile detail:", error)
+                setError(error)
+            } finally {
+                setLoading(false)
             }
         }
 
@@ -26,6 +30,16 @@ export default function SnowmobileDetail() {
     const search = ("?" + location.state?.search) || ""
     const type = location.state?.type
 
+    if (loading) {
+        return <h1>Loading...</h1>
+    }
+
+    if (error) {
+        return (
+            <h1>There was an error: {error.message}</h1>
+        )
+    }
+
     return (
         <div className="snowmobile-detail-container">
             <Link
@@ -33,7 +47,7 @@ export default function SnowmobileDetail() {
                 relative='path'
                 className="back-button"
             >&larr; <span>Back to all {type} snowmobiles</span></Link>
-            {snowmobile ? (
+            {snowmobile && (
                 <div className="snowmobile-detail">
                     <img src={snowmobile.imageUrl} />
                     <i className={`snowmobile-type ${snowmobile.type} selected`}>{snowmobile.type}</i>
@@ -42,7 +56,7 @@ export default function SnowmobileDetail() {
                     <p>{snowmobile.description}</p>
                     <button className="link-button">Rent this snowmobile</button>
                 </div>
-            ) : <h2>Loading...</h2>}
+            ) }
         </div>
     )
 }

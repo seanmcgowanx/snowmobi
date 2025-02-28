@@ -6,6 +6,8 @@ export default function HostSnowmobileDetail() {
 
     const { id } = useParams()
     const [snowmobile, setSnowmobile] = React.useState(null)
+    const [loading, setLoading] = React.useState(false)
+    const [error, setError] = React.useState(null)
 
     const activeStyle = {
         fontWeight: "bold",
@@ -16,20 +18,27 @@ export default function HostSnowmobileDetail() {
 
     React.useEffect(() => {
         async function loadHostSnowmobile() {
+            setLoading(true)
             try {
                 const data = await getSnowmobile(id)
                 setSnowmobile(data)
             } catch (error) {
-                console.error('Error loading host snowmobile', error)
+                setError(error)
+            } finally {
+                setLoading(false)
             }
         }
 
         loadHostSnowmobile()
     }, [id])
 
-    if (!snowmobile) {
+    if (loading) {
+        return <h1>Loading...</h1>
+    }
+
+    if (error) {
         return (
-            <p>...Loading</p>
+            <h1>There was an error: {error.message}</h1>
         )
     }
 
@@ -39,6 +48,8 @@ export default function HostSnowmobileDetail() {
                 to="../snowmobiles"
                 className="back-button"
             >&larr; <span>Back to all snowmobiles</span></Link>
+
+            { snowmobile && 
 
             <div className="host-snowmobile-detail-layout-container">
                 <div className="host-snowmobile-detail">
@@ -76,7 +87,7 @@ export default function HostSnowmobileDetail() {
             <Outlet context={{ snowmobile }}/>
 
             </div>
-
+            }
         </section>
     )
 }

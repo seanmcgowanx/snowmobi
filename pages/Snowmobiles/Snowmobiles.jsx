@@ -6,28 +6,27 @@ export default function Snowmobiles() {
 
     const [searchParams, setSearchParams] = useSearchParams()
     const [snowmobiles, setSnowmobiles] = React.useState([])
+    const [loading, setLoading] = React.useState(false)
+    const [error, setError] = React.useState(null)
 
     const typeFilter = searchParams.get("type")
 
     React.useEffect(() => {
         async function loadSnowmobiles() {
+            setLoading(true)
             try {
                 const data = await getSnowmobiles()
                 setSnowmobiles(data)
             } catch (error) {
-                console.error("Error fetching snowmobiles:", error)
+                setError(error)
+            } finally {
+                setLoading(false)
             }
         }
 
         loadSnowmobiles();
 
     }, []);
-
-    if(snowmobiles.length === 0) {
-        return (
-            <h3>...Loading</h3>
-        )
-    }
 
     const displayedSnowmobiles = typeFilter
         ? snowmobiles.filter(snowmobile => snowmobile.type === typeFilter)
@@ -68,6 +67,16 @@ export default function Snowmobiles() {
             }
             return prevParams
         })
+    }
+
+    if (loading) {
+        return <h1>Loading...</h1>
+    }
+
+    if (error) {
+        return (
+            <h1>There was an error: {error.message}</h1>
+        )
     }
 
     return(
