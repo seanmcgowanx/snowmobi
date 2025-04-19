@@ -17,6 +17,7 @@ import HostSnowmobilePricing from './pages/Host/HostSnowmobilePricing';
 import HostSnowmobilePhotos from './pages/Host/HostSnowmobilePhotos';
 import NotFound from './pages/NotFound';
 import Login from './pages/Login';
+import AuthRequired from './components/AuthRequired';
 
 function App() {
   return (
@@ -28,15 +29,17 @@ function App() {
           <Route path="snowmobiles" element= {<Snowmobiles />}/>
           <Route path="snowmobiles/:id" element= {<SnowmobileDetail />}/>
           <Route path="login"element={<Login />} />
-          <Route path="host" element={<HostLayout/>}>
-            <Route index element= {<Dashboard />}/>
-            <Route path="income" element= {<Income />}/>
-            <Route path="reviews" element= {<Reviews />}/>
-            <Route path="snowmobiles" element= {<HostSnowmobiles />}/>
-            <Route path="snowmobiles/:id" element= {<HostSnowmobileDetail />}>
-              <Route index element= {<HostSnowmobileInfo />}/>
-              <Route path="pricing" element= {<HostSnowmobilePricing />}/>
-              <Route path="photos" element= {<HostSnowmobilePhotos />}/>
+          <Route element={<AuthRequired/>}>
+            <Route path="host" element={<HostLayout/>}>
+              <Route index element= {<Dashboard />}/>
+              <Route path="income" element= {<Income />}/>
+              <Route path="reviews" element= {<Reviews />}/>
+              <Route path="snowmobiles" element= {<HostSnowmobiles />}/>
+              <Route path="snowmobiles/:id" element= {<HostSnowmobileDetail />}>
+                <Route index element= {<HostSnowmobileInfo />}/>
+                <Route path="pricing" element= {<HostSnowmobilePricing />}/>
+                <Route path="photos" element= {<HostSnowmobilePhotos />}/>
+              </Route>
             </Route>
           </Route>
           <Route path="*" element={<NotFound />} />

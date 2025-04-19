@@ -51,3 +51,12 @@ export async function getHostSnowmobiles() {
     }))
     return snowmobiles
 }
+
+export function loginUser(loginFormData) {
+    if (loginFormData.email === "" && loginFormData.password === "") {
+        return true
+    } else {
+        return false
+    }
+    
+}

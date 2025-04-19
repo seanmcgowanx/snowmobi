@@ -1,12 +1,18 @@
 import React from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
+import { loginUser } from "../api"
 
 export default function Login() {
     const [loginFormData, setLoginFormData] = React.useState({ email: "", password: "" })
+    const location = useLocation()
+    const [status, setStatus] = React.useState("idle")
+    const [error, setError] = React.useState(null)
 
     function handleSubmit(e) {
+        setError(null)
+        setStatus("submitting")
         e.preventDefault()
-        console.log(loginFormData)
+        loginUser(loginFormData) ? setStatus("idle") : (setError("No existing users with those credentials"), setStatus("idle"))
     }
 
     function handleChange(e) {
@@ -19,6 +25,7 @@ export default function Login() {
 
     return (
         <div className="login-container">
+            {location.state?.message && <h3 className="login-first">{location.state.message}</h3>}
             <h1>Sign in to your account</h1>
             <form onSubmit={handleSubmit} className="login-form">
                 <input
@@ -35,7 +42,9 @@ export default function Login() {
                     placeholder="Password"
                     value={loginFormData.password}
                 />
-                <button>Log in</button>
+                <button disabled={status === "submitting"}>Log in</button>
+                {error && <h3 className="login-first">{error}</h3>}
+                <h3 className="login-tip">Click Log in with <u>no credentials</u> to see demo account!</h3>
             </form>
         </div>
     )

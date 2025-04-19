@@ -40,6 +40,8 @@ export default function SnowmobileDetail() {
         )
     }
 
+    
+
     return (
         <div className="snowmobile-detail-container">
             <Link

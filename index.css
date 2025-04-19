@@ -559,3 +559,11 @@ i[class*='snowmobile-type-'] {
     color: white;
     font-family: "Inter", sans-serif;
 }
+
+.login-first {
+    color: red;
+}
+
+.login-tip {
+    line-height: 1.5;
+}
