@@ -4,15 +4,26 @@ import { loginUser } from "../api"
 
 export default function Login() {
     const [loginFormData, setLoginFormData] = React.useState({ email: "", password: "" })
-    const location = useLocation()
     const [status, setStatus] = React.useState("idle")
     const [error, setError] = React.useState(null)
 
-    function handleSubmit(e) {
-        setError(null)
-        setStatus("submitting")
+    const location = useLocation()
+    const navigate = useNavigate()
+    const from = location.state?.from || "/host"
+
+    async function handleSubmit(e) {
         e.preventDefault()
-        loginUser(loginFormData) ? setStatus("idle") : (setError("No existing users with those credentials"), setStatus("idle"))
+        setStatus("submitting")
+        setError(null)
+
+        try {
+            const data = await loginUser(loginFormData)
+            navigate(from, { replace: true })
+        } catch (err) {
+            setError(err)
+        } finally {
+            setStatus("idle")
+        }
     }
 
     function handleChange(e) {
@@ -27,6 +38,10 @@ export default function Login() {
         <div className="login-container">
             {location.state?.message && <h3 className="login-first">{location.state.message}</h3>}
             <h1>Sign in to your account</h1>
+            {
+                error?.message &&
+                <h3 className="login-first">{error.message}</h3>
+            }
             <form onSubmit={handleSubmit} className="login-form">
                 <input
                     name="email"
@@ -42,8 +57,9 @@ export default function Login() {
                     placeholder="Password"
                     value={loginFormData.password}
                 />
-                <button disabled={status === "submitting"}>Log in</button>
-                {error && <h3 className="login-first">{error}</h3>}
+                <button disabled={status === "submitting"}>
+                    {status === "submitting" ? "Logging in..." : "Log in"}
+                </button>
                 <h3 className="login-tip">Click Log in with <u>no credentials</u> to see demo account!</h3>
             </form>
         </div>

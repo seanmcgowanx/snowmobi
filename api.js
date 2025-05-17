@@ -52,11 +52,30 @@ export async function getHostSnowmobiles() {
     return snowmobiles
 }
 
-export function loginUser(loginFormData) {
-    if (loginFormData.email === "" && loginFormData.password === "") {
-        return true
-    } else {
-        return false
-    }
-    
+export async function loginUser(loginFormData) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const { email, password } = loginFormData;
+
+            if (email === "" && password === "") {
+                // Store "loggedin" flag in localStorage as a string "true"
+                localStorage.setItem("loggedin", "true");
+
+                resolve({
+                    data: {
+                        user: "mockUser",
+                        token: "demo-token-123"
+                    }
+                });
+            } else {
+                reject({
+                    message: "No user with those credentials found",
+                    statusText: "Unauthorized",
+                    status: 401
+                });
+            }
+        }, 1000);
+    });
 }
+
+
